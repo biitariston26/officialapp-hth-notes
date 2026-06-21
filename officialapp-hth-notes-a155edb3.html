@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>华体会 | 信息索引 · 资料整理</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      padding: 4rem 1.5rem 3.2rem;
+      text-align: center;
+      position: relative;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      color: #facc15;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+      font-size: 1.1rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+    .hero .badge {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: #334155;
+      color: #cbd5e1;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* 正文区：浅色背景卡片布局 */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 2.8rem 0 2rem;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 40%;
+      height: 3px;
+      background: #facc15;
+      margin-top: 0.3rem;
+      border-radius: 4px;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.8rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: #1e293b;
+    }
+    .card p {
+      font-size: 0.96rem;
+      color: #475569;
+      margin-bottom: 0.5rem;
+    }
+    .card .tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+    }
+
+    /* 强调色链接 */
+    a {
+      color: #0b5e42;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #94a3b8;
+      transition: color 0.15s, text-decoration-color 0.15s;
+    }
+    a:hover {
+      color: #1a7f5c;
+      text-decoration-color: #1a7f5c;
+    }
+
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.8rem 1.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      margin: 1.5rem 0 2rem;
+      line-height: 1.8;
+      font-size: 1.02rem;
+    }
+    .link-paragraph strong {
+      color: #0f172a;
+    }
+
+    /* 适合人群双列 */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .audience-item {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .audience-item h4 {
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+    .audience-item p {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    /* 细节摘要 */
+    .faq-box {
+      background: #eef2f6;
+      border-radius: 18px;
+      padding: 1.8rem 1.8rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+    .faq-box h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #d1d9e6;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item strong {
+      display: block;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 0.2rem;
+    }
+    .faq-item span {
+      font-size: 0.93rem;
+      color: #475569;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+      padding: 2rem 0 1.2rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.9rem; }
+      .hero p { font-size: 0.98rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .card-grid { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 深色头图 -->
+<header class="hero">
+  <h1>华体会 · 信息索引</h1>
+  <p>从资料整理与信息归档的角度，清晰梳理平台脉络，方便查阅与对比。</p>
+  <span class="badge">内容卡片 · 用途说明 · 人群参考</span>
+</header>
+
+<main class="container">
+
+  <!-- 用途卡片：主视觉/信息卡片 -->
+  <section class="section">
+    <h2 class="section-title">主要用途</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>📋 内容聚合</h3>
+        <p>汇集整理多种主题信息，便于快速浏览与筛选。适合需要系统性查阅资料的使用者。</p>
+        <span class="tag">信息档案</span>
+      </div>
+      <div class="card">
+        <h3>🗂️ 索引结构</h3>
+        <p>提供清晰的分类框架，将分散的内容按条目归位，降低查找成本，提升效率。</p>
+        <span class="tag">分类导航</span>
+      </div>
+      <div class="card">
+        <h3>🌐 多元视角</h3>
+        <p>涵盖不同场景下的使用说明与背景介绍，帮助使用者建立更立体的认知。</p>
+        <span class="tag">场景参考</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 自然链接段落 -->
+  <div class="link-paragraph">
+    <p>整理过程中，我们发现许多用户习惯从综合索引出发，逐步深入探索具体模块。如果你想直接了解平台的基础框架与更新记录，可以查阅 <strong><a href="https://officialapp-hth.com.cn">华体会</a></strong> 的资料总览。那里汇聚了较为完整的条目说明与功能快照，方便你结合自身需求做进一步筛选。</p>
+    <p style="margin-top:0.8rem;">另外，在阅读各类信息卡片时，建议留意每张卡片下方的标签标识，它们对应着不同的用途方向，能帮助你更快定位感兴趣的内容。</p>
+  </div>
+
+  <!-- 适合人群 -->
+  <section class="section">
+    <h2 class="section-title">适合人群</h2>
+    <div class="two-col">
+      <div class="audience-item">
+        <h4>📚 信息整理者</h4>
+        <p>经常需要收集、归类与比对各平台资料的用户，可通过该索引节省重复梳理时间。</p>
+      </div>
+      <div class="audience-item">
+        <h4>🔍 功能探索者</h4>
+        <p>希望快速了解不同模块用途与适用场景的访问者，卡片式结构能提供清晰引导。</p>
+      </div>
+      <div class="audience-item">
+        <h4>📝 轻度比较用户</h4>
+        <p>想从较客观的角度获取各板块说明，便于做初步判断或后续深入了解。</p>
+      </div>
+      <div class="audience-item">
+        <h4>🧭 回溯查阅者</h4>
+        <p>已有一定使用经验，需要回头确认某些功能定义或更新说明的群体。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-box">
+    <h3>📌 常见问题摘要</h3>
+    <div class="faq-item">
+      <strong>这个索引页与直接打开有什么不同？</strong>
+      <span>本页主要提供结构化的内容预览，方便快速浏览各模块方向，并非完整功能界面，可作为资料索引入口。</span>
+    </div>
+    <div class="faq-item">
+      <strong>卡片上的标签怎么理解？</strong>
+      <span>标签是对该卡片用途的简短分类，比如「信息档案」「场景参考」等，有助于按主题筛选。</span>
+    </div>
+    <div class="faq-item">
+      <strong>链接指向的信息源是否持续更新？</strong>
+      <span>索引指向的链接对应平台的公开资料区，具体更新频率以实际页面标注为准。建议定期回溯。</span>
+    </div>
+  </div>
+
+  <!-- 额外简短提示 -->
+  <div style="background:transparent; padding:0.2rem 0 1.2rem; color:#475569; font-size:0.95rem; border-left:3px solid #facc15; padding-left:1rem;">
+    💡 提示：使用过程中，可结合自身关注的方向对照卡片分类进行查阅，有助于提高信息获取效率。
+  </div>
+
+</main>
+
+<footer class="footer-note">
+  内容卡片 · 索引参考 · 资料整理 &mdash; 信息归档页面
+</footer>
+
+</body>
+</html>
