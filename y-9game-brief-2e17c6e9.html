@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九游 · 游戏生活指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f2f4f7;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .magazine {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    /* ------- HERO 横幅 ------- */
+    .hero {
+      background: linear-gradient(145deg, #d9e2ef 0%, #b7c9de 100%);
+      padding: 4rem 2.5rem 3.5rem;
+      text-align: center;
+      border-bottom: 1px solid #dce3ec;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1d2b3b;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero .sub {
+      font-size: 1.12rem;
+      color: #3b4b5e;
+      background: rgba(255, 255, 255, 0.5);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      margin-top: 0.3rem;
+    }
+
+    /* ------- 卡片式段落 ------- */
+    .content {
+      padding: 2.5rem 2.5rem 1.8rem;
+    }
+
+    .card-split {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .card {
+      background: #f9fafc;
+      border: 1px solid #e6ecf3;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 550;
+      color: #1f3144;
+      margin-bottom: 1rem;
+      border-left: 4px solid #8196b0;
+      padding-left: 1rem;
+    }
+
+    .card p {
+      margin-bottom: 0.9rem;
+      color: #2f3f53;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inline-link {
+      font-weight: 500;
+      color: #1a4b7a;
+      text-decoration: none;
+      border-bottom: 1px solid #b7cbdf;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .inline-link:hover {
+      color: #0c3052;
+      border-bottom-color: #0c3052;
+    }
+
+    .highlight-badge {
+      display: inline-block;
+      background: #eef3f9;
+      border-radius: 30px;
+      padding: 0.1rem 0.9rem;
+      font-size: 0.85rem;
+      color: #2a4a6a;
+      border: 0.5px solid #cddae8;
+      margin-right: 0.3rem;
+    }
+
+    /* ------- 特点小卡片网格 ------- */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.2rem 0 0.2rem;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border: 1px solid #e0e8f0;
+      border-radius: 16px;
+      padding: 1rem 0.9rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #1f3649;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.01);
+    }
+
+    .feature-item .icon {
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ------- 页尾 ------- */
+    .footer-note {
+      background: #edf2f8;
+      margin: 2rem 2.5rem 2rem;
+      padding: 1.6rem 2rem;
+      border-radius: 20px;
+      border: 1px solid #dae2ed;
+      text-align: center;
+      color: #2a4058;
+    }
+
+    .footer-note p {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .footer-note .small-meta {
+      font-size: 0.9rem;
+      color: #5d7188;
+    }
+
+    /* ------- 响应式 ------- */
+    @media (max-width: 680px) {
+      .hero {
+        padding: 2.8rem 1.2rem 2.5rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .content {
+        padding: 1.8rem 1.2rem 1rem;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+      .footer-note {
+        margin: 1.8rem 1.2rem 1.8rem;
+        padding: 1.2rem 1rem;
+      }
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="magazine">
+    <!-- HERO 横幅 -->
+    <div class="hero">
+      <h1>九游 · 不止是游戏</h1>
+      <div class="sub">玩家聚集地 · 资讯 · 社区 · 漫游指南</div>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="content">
+      <div class="card-split">
+
+        <!-- 第一段：背景与可信说明 -->
+        <div class="card">
+          <h2>📰 关于这里</h2>
+          <p>
+            <a href="https://y-9game.com" class="inline-link">九游</a> 
+            从最初的小众游戏同好站点，逐步成长为面向中文玩家的综合游戏信息平台。站内内容涵盖新作评测、独立游戏推荐、老游戏考古以及社区闲聊。运营团队一直坚持真实体验、不夸大、不硬推的原则，每一篇推荐都经过实际试玩。经过多年积累，九游沉淀了一套靠谱的游戏筛选逻辑——无论是休闲玩家还是硬核爱好者，都能在这里找到适合自己的角落。
+          </p>
+          <p>
+            平台本身不参与任何诱导充值或虚假宣传，所有内容均以玩家视角出发。站点运营至今保持透明、克制的风格，这也是许多老用户愿意长期驻留的原因。
+          </p>
+        </div>
+
+        <!-- 第二段：自然介绍 + 特点 -->
+        <div class="card">
+          <h2>🎯 日常与探索</h2>
+          <p>
+            在九游，你既能看到最新热门游戏的深度分析，也能发现冷门宝藏的惊喜欢呼。站内没有浮夸的「必玩」「神作」标签，而是用平实的语言告诉你：<em>这个游戏哪里有趣，哪里可能让你皱眉</em>。很多玩家把这里当成选游戏前的参考站，先来逛逛再说。
+          </p>
+          <p>
+            另外社区氛围也比较轻松，发帖求推荐、写短评、晒截图都很自然。没有繁琐的等级制度，也没有机器人刷屏，更多是真实玩家的日常交流。
+          </p>
+
+          <!-- 特点小卡片网格（增加内容密度） -->
+          <div class="feature-grid">
+            <div class="feature-item">
+              <span class="icon">📋</span> 玩家真实评测
+            </div>
+            <div class="feature-item">
+              <span class="icon">🗂️</span> 分类游戏库
+            </div>
+            <div class="feature-item">
+              <span class="icon">💬</span> 闲聊与求助
+            </div>
+            <div class="feature-item">
+              <span class="icon">🔍</span> 冷门挖掘
+            </div>
+          </div>
+          <p style="margin-top: 0.8rem; font-size: 0.95rem;">
+            无论是刚入坑的新手，还是十几年的老玩家，都能在这里获得一份踏实感。
+          </p>
+        </div>
+
+        <!-- 第三段：使用场景 + FAQ摘要 -->
+        <div class="card">
+          <h2>❓ 常见疑问 & 场景</h2>
+          <p>
+            <span class="highlight-badge">🤔 这里适合谁？</span> 
+            如果你厌倦了铺天盖地的氪金广告，想找个干净的地方聊聊游戏本身，那 
+            <a href="https://y-9game.com" class="inline-link">九游</a> 会是一个不错的选择。
+          </p>
+          <p>
+            <span class="highlight-badge">📅 更新频率？</span> 
+            每周都有新内容上线，包括评测、杂谈和社区活动。保持节奏但不刷屏，每次打开都可能有点小惊喜。
+          </p>
+          <p>
+            <span class="highlight-badge">🔐 关于隐私与安全？</span> 
+            站点使用标准 HTTPS 加密，不追踪用户隐私，也没有隐藏广告联盟。你可以放心浏览而不被追踪。
+          </p>
+          <p style="margin-top: 0.5rem;">
+            更多疑问也可以直接去站内逛逛，或者看看其他玩家的讨论。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+      <p>🕹️ 如果你还没去过，不妨抽空到 <a href="https://y-9game.com" class="inline-link">九游</a> 里转一转。</p>
+      <p class="small-meta">一个由玩家维护、为玩家服务的角落 · 不喧哗，自有声</p>
+    </div>
+  </div>
+</body>
+</html>
