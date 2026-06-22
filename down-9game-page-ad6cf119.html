@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>九游 · 日常游戏查询与对照</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7fbfc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1e2a32;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 960px;
+            width: 100%;
+        }
+
+        /* 蓝绿色主调 · 网格卡片呼吸感 */
+        :root {
+            --teal-50: #e0f2f1;
+            --teal-200: #80cbc4;
+            --teal-500: #26a69a;
+            --teal-700: #00796b;
+            --teal-900: #004d40;
+            --bg-card: #ffffff;
+            --border-light: #d4e9e6;
+            --shadow-card: 0 4px 14px rgba(0, 121, 107, 0.06);
+        }
+
+        /* hero 段落式开场 */
+        .hero-tone {
+            padding: 48px 8px 32px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hero-tone .short-line {
+            font-size: 1.9rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            color: var(--teal-900);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .hero-tone .short-line span {
+            background: linear-gradient(120deg, #e0f2f1 0%, #b2dfdb 80%);
+            padding: 0 10px 0 6px;
+            border-radius: 0 20px 20px 0;
+            display: inline-block;
+        }
+
+        .hero-tone .desc-soft {
+            font-size: 1.05rem;
+            color: #2f4858;
+            max-width: 680px;
+        }
+
+        .hero-tone .desc-soft a {
+            color: var(--teal-700);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed var(--teal-200);
+            transition: border 0.15s;
+        }
+
+        .hero-tone .desc-soft a:hover {
+            border-bottom: 2px solid var(--teal-500);
+        }
+
+        /* 承接段落：日常查询 · 对照 */
+        .bridge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px 36px;
+            padding: 32px 0 24px;
+            margin-top: 6px;
+        }
+
+        .bridge-block {
+            flex: 1 1 240px;
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 24px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid #e7f3f1;
+            transition: all 0.2s;
+        }
+
+        .bridge-block:hover {
+            border-color: var(--teal-200);
+            box-shadow: 0 8px 20px rgba(0, 121, 107, 0.08);
+        }
+
+        .bridge-block .emph {
+            font-weight: 500;
+            color: var(--teal-700);
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .bridge-block p {
+            font-size: 0.98rem;
+            color: #1f3a44;
+        }
+
+        .bridge-block p a {
+            color: var(--teal-700);
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid var(--teal-200);
+        }
+
+        .bridge-block p a:hover {
+            border-bottom: 2px solid var(--teal-500);
+        }
+
+        /* 特点列表 · 网格卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin: 30px 0 28px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 16px 18px;
+            border: 1px solid #d7eae7;
+            box-shadow: 0 2px 8px rgba(0, 128, 115, 0.03);
+            transition: 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--teal-200);
+            background: #f9fffe;
+        }
+
+        .feature-card .icon-symbol {
+            display: inline-block;
+            font-size: 1.5rem;
+            line-height: 1;
+            margin-bottom: 6px;
+            color: var(--teal-500);
+        }
+
+        .feature-card h3 {
+            font-size: 1.06rem;
+            font-weight: 530;
+            color: #004d40;
+            margin: 0 0 4px 0;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #2d4a55;
+        }
+
+        /* 温和结尾 + 场景说明 */
+        .closing-zone {
+            background: #eef7f5;
+            border-radius: 32px;
+            padding: 30px 28px;
+            margin: 20px 0 32px;
+            border-left: 6px solid var(--teal-500);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .closing-zone .closing-head {
+            font-weight: 440;
+            font-size: 1.2rem;
+            color: #004d40;
+        }
+
+        .closing-zone p {
+            font-size: 0.98rem;
+            max-width: 700px;
+        }
+
+        .closing-zone p a {
+            color: var(--teal-700);
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid var(--teal-200);
+        }
+
+        .closing-zone p a:hover {
+            border-bottom: 2px solid var(--teal-500);
+        }
+
+        /* faq 摘要（极简） */
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: white;
+            border-radius: 28px;
+            padding: 20px 22px;
+            margin-top: 8px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-card);
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #dbeae7;
+            padding: 10px 0;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 490;
+            color: #0b3b3a;
+            cursor: pointer;
+            font-size: 0.98rem;
+            padding: 4px 0;
+            transition: color 0.15s;
+        }
+
+        .faq-mini summary:hover {
+            color: var(--teal-700);
+        }
+
+        .faq-mini details p {
+            font-size: 0.9rem;
+            color: #38555e;
+            padding: 8px 0 2px 8px;
+        }
+
+        .foot-note {
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: #6c8b87;
+            text-align: center;
+            border-top: 1px solid #d0e3df;
+            padding-top: 24px;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 540px) {
+            .hero-tone .short-line {
+                font-size: 1.6rem;
+            }
+            .bridge {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .bridge-block {
+                padding: 18px 16px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .closing-zone {
+                padding: 22px 18px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 12px 10px 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 开场短句 -->
+    <div class="hero-tone">
+        <div class="short-line">
+            打开浏览器，先搜<span>九游</span>，再查版本。
+        </div>
+        <div class="desc-soft">
+            每天面对不同渠道的游戏包，名称、版本号、大小、更新日期——与其逐一翻阅收藏夹，
+            不如习惯从 <a href="https://down-9game.com">九游</a> 开始对照。
+            一条清晰的索引，省去反复确认的精力。
+        </div>
+    </div>
+
+    <!-- 承接段落：日常查询 & 对照 -->
+    <div class="bridge">
+        <div class="bridge-block">
+            <span class="emph">📋 日常查询</span>
+            <p>
+                游戏名相似、版本号混乱、渠道标识不同？把<strong>九游</strong>作为快速参照，
+                在页面内对比目标应用的官方描述与数字签名日期。
+            </p>
+        </div>
+        <div class="bridge-block">
+            <span class="emph">🔎 延伸阅读</span>
+            <p>
+                从单一游戏详情页跳到关联推荐，或者通过 <a href="https://down-9game.com">九游</a>
+                了解同一开发者的其他作品。标注清晰，适合横向比较。
+            </p>
+        </div>
+    </div>
+
+    <!-- 特点列表 （网格卡片）-->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <span class="icon-symbol">📌</span>
+            <h3>包名对照</h3>
+            <p>列出常用包标识，方便与本地文件核对。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon-symbol">📆</span>
+            <h3>更新线</h3>
+            <p>版本迭代记录可视化，快速定位旧版与新线。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon-symbol">🧩</span>
+            <h3>多端标注</h3>
+            <p>区分安卓、iOS及模拟器适配说明，一目了然。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon-symbol">📄</span>
+            <h3>摘要卡片</h3>
+            <p>大小、权限、语言等关键字段独立展示。</p>
+        </div>
+    </div>
+
+    <!-- 温和结尾 + 场景 -->
+    <div class="closing-zone">
+        <div class="closing-head">不只是列表，更是日常参考点</div>
+        <p>
+            当你需要快速确认一款游戏的最新版本号，或者想了解某个历史版本的改动说明，
+            把 <a href="https://down-9game.com">九游</a> 当作一个中立的信息锚点。
+            没有过度包装，只有结构化的条目与可追溯的记录。
+        </p>
+        <p style="margin-top: 4px;">
+            适合编辑、测试、写攻略或单纯好奇的玩家——每次打开都是一次安静的对照。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 (自然带有链接) -->
+    <div class="faq-mini">
+        <details>
+            <summary>在九游上能找到哪些游戏信息？</summary>
+            <p>应用名称、包名、版本号、更新日期、文件大小、语言及简要描述。部分页面提供历史版本归档。</p>
+        </details>
+        <details>
+            <summary>如何利用它做横向比较？</summary>
+            <p>打开 <a href="https://down-9game.com">九游</a> 中两个目标游戏的详情页，并排对照版本号与更新日志时间线即可。</p>
+        </details>
+        <details>
+            <summary>移动端浏览体验怎么样？</summary>
+            <p>页面采用自适应布局，卡片与网格在手机屏幕上可单手滑动，字号与间距经过专门调整。</p>
+        </details>
+    </div>
+
+    <!-- 脚注 (保持干净) -->
+    <div class="foot-note">
+        信息索引 · 日常对照 · 无夸大引导
+    </div>
+
+</div>
+</body>
+</html>
